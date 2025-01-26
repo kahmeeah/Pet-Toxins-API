@@ -36,51 +36,37 @@ for letter_block in letter_blocks:
             image_url = image_style.split("url('")[1].split("')")[0]
 
             # alternate names
-            alternate_names = toxin_soup.find(class_='altenate-text').text.strip() # No, this is not a typo
+            alternate_names = toxin_soup.find(class_='altenate-text').text.strip() if toxin_soup.find(class_='altenate-text') else None # No, this is not a typo
             # alternate_names = alternate_name_element.text.strip()
 
             # description
             description_class = toxin_soup.find(class_='poison-description')
-            description = description_class.find("p").text.strip()
+            description = description_class.find("p").text.strip() if description_class and description_class.find("p") else None
 
             # symptoms
             symptoms_list = description_class.find_all("li")
-            symptoms = ', '.join(li.text for li in symptoms_list)
+            symptoms = ', '.join(li.text for li in symptoms_list) if symptoms_list else None
 
             # severity level
 
             # which animals
 
+
             # animal_soup = toxin_soup.find("ul", class_='tab-buttons')
             animal_soup = toxin_soup.find("div", class_="tab-sections")
-            if animal_soup and animal_soup.find_all(): # if div and div not empty
-                # find_all: h3 class title, p class toxic-desc
-                keys = animal_soup.find_all("h3", class_="title")
-                values = animal_soup.find_all("p", class_="toxi-desc")
-                # keys = animal type
-                # value = severity level
-                print(keys, values)
-                print(len(keys))
+            if animal_soup and animal_soup.find_all(): # if div and div not empty -> find_all: h3 class title, p class toxic-desc
+                keys = animal_soup.find_all("h3", class_="title") # animal type
+                values = animal_soup.find_all("p", class_="toxi-desc") # severity level
 
-                if not values:
-                    print("Values true")
-                    for key, value in zip(keys, values):
-                        print("Key:", key.text)
-                        print("Value:", value.text)
-                        animals = {key.text: (value.text if value.text else None) for key, value in zip(keys, values)}
-                    
+                if keys and values:
+                    animals = {key.text: (value.text if value.text else None) for key, value in zip(keys, values)}
+                elif keys and not values:
+                    animals = { key.text:"" for key in keys}
                 else:
-                    print("Values false")
-                    i = 0
-                    values = []
-                    while i < len(keys):
-                        values.insert(i, None)
-                        i += 1
-
-                
+                    animals = {}
             else:
-                animals = None
-            # else animals = None
+                animals = {}
+
             
         else:
             print("Error:",toxin_page.status_code)

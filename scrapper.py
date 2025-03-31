@@ -61,7 +61,7 @@ def scrape_toxins():
                     if keys and values:
                         animals = {key.text: ({"severity": value.text.strip()} if value.text else None) for key, value in zip(keys, values)}
                     elif keys and not values:
-                        animals = { key.text: None for key in keys}
+                        animals = { key.text: {"severity": None} for key in keys}
                     else:
                         animals = {}
                 else:

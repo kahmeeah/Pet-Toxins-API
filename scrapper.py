@@ -93,23 +93,3 @@ def scrape_toxins():
             toxins.append(toxin)
     return toxins
             
-
-    # TODO: transition print statements to dict or list
-    # save ^ to sqlite db
-
-    # prints a list of every item on the list
-
-    # toxin_name = soup.find_all(class_="link-poison")
-
-    # toxin_category = soup.find_all('span' ,{'data-type': True})
-
-    # loop to create a single dict, append all to to list at end of loop
-
-    # for name in toxin_name:
-    #     print("Item: ", name.text)
-
-    # for category in toxin_category:
-    #      print("Category:", category.text)
-
-    # TO-DO: grab link from each item, go to link and grab additional info from there
-    #        also grab the category type

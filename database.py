@@ -21,18 +21,23 @@ def insert_data(toxins):
 
     # insert each toxin from toxins into table
     for toxin in toxins:
-        cursor.execute("""INSERT INTO toxins (name, category, link, image_url, alternate_names, description, symptoms, animals
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?))
-                       """, (
-                           toxin["name"],
-                           toxin["category"],
-                           toxin["link"],
-                           toxin["image_url"],
-                           toxin["alternate_names"],
-                           toxin["description"],
-                           toxin["symptoms"],
-                           json.dumps(toxin["animals"])
-                       ))
+        try:
+            cursor.execute("""INSERT INTO toxins (name, category, link, image_url, alternate_names, description, symptoms, animals)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            toxin["name"],
+                            toxin["category"],
+                            toxin["link"],
+                            toxin["image_url"],
+                            toxin["alternate_names"],
+                            toxin["description"],
+                            toxin["symptoms"],
+                            json.dumps(toxin["animals"])
+                        ))
+        except sqlite3.IntegrityError: #handle duplicates
+            print(f"Skipped duplicate: {toxin['name']}")
+
         
     connection.commit()
     connection.close()
+    print("All insertions complete. Database is up to date.")

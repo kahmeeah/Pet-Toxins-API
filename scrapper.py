@@ -45,7 +45,7 @@ def scrape_toxins():
 
                 # symptoms
                 symptoms_list = description_class.find_all("li")
-                symptoms = ', '.join(li.text for li in symptoms_list) if symptoms_list else None
+                symptoms = ', '.join(li.text for li in symptoms_list) if symptoms_list else "None specified. Monitor for general illness symptoms such as vomiting, lethargy, difficulty dreathing, and behavioral changes."
 
                 # severity level
 
@@ -59,9 +59,9 @@ def scrape_toxins():
                     values = animal_soup.find_all("p", class_="toxi-desc") # severity level
 
                     if keys and values:
-                        animals = {key.text: (value.text if value.text else None) for key, value in zip(keys, values)}
+                        animals = {key.text: ({"severity": value.text.strip()} if value.text else None) for key, value in zip(keys, values)}
                     elif keys and not values:
-                        animals = { key.text:"" for key in keys}
+                        animals = { key.text: None for key in keys}
                     else:
                         animals = {}
                 else:

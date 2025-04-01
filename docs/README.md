@@ -8,4 +8,4 @@ A public API to provide valuable data about toxic substances for pets. Scraped f
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.

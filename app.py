@@ -11,6 +11,37 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row  #to get dictlike rows
     return connection
 
+# get available routes and categories
+@app.route("/endpoints", methods=["GET"])
+def get_endpoints_and_filters():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT category FROM toxins")
+    raw_categories = [row["category"] for row in cursor.fetchall()]
+    normalized = {cat.strip().title() for cat in raw_categories if cat}
+    categories = sorted(normalized)
+
+    cursor.execute("SELECT animals FROM toxins")
+    animal_keys = set()
+    for row in cursor.fetchall():
+        animals = json.loads(row["animals"])
+        for key in animals.keys():
+            animal_keys.add(key)
+
+    connection.close()
+
+    return jsonify({
+        "routes": [
+            { "method": "GET", "path": "/toxins", "description": "Get all toxins (filters: name, animal, category)" },
+            { "method": "GET", "path": "/toxins/<id>", "description": "Get a specific toxin by ID" },
+            { "method": "GET", "path": "/endpoints", "description": "List filterable categories, animals, and all routes" }
+        ],
+        "categories": sorted(categories),
+        "animals": sorted(animal_keys)
+    })
+
+
 # get all toxins, get all toxins by param
 @app.route("/toxins", methods=["GET"])
 def get_toxins():

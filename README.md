@@ -1,9 +1,24 @@
-# Pet Poison Hotline Scraper and API
+# 🐾 Pet Toxins API
 
-## Overview
+<!-- [![Docs](https://img.shields.io/badge/docs-online-blueviolet)](https://kahmeeah.github.io/pet-toxins-api) -->
+[![API Live](https://img.shields.io/badge/api-live-brightgreen)](https://pet-toxins-api.up.railway.app)
+<!-- [![PyPI](https://img.shields.io/pypi/v/pettoxins-client?label=client)](https://pypi.org/project/pettoxins/) -->
 
-This Python program is designed to scrape data from the Pet Poison Helpline website and create an API to access the collected information. The Pet Poison Helpline provides valuable data about toxic substances for pets, and this tool allows users to access this data programmatically.
+A public API to provide valuable data about toxic substances for pets. Scraped from the [Pet Poison Helpline](https://www.petpoisonhelpline.com/poisons/), organized in a SQLite database, and exposed via a REST API built with Flask.
+
+This repo includes:
+
+- **Web Scraper** — pulls data from the Pet Poison Helpline  
+- **SQLite Database** — structured toxicology info  
+- **REST API** — filtering by animal, category, or toxin name  
+
+---
+
+
+## Docs
+
+Coming soon
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. 

@@ -11,6 +11,13 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row  #to get dictlike rows
     return connection
 
+# default route
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({
+        "message": "Pet Toxins API"
+    })
+
 # get available routes and categories
 @app.route("/endpoints", methods=["GET"])
 def get_endpoints_and_filters():

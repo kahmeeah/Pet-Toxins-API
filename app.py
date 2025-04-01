@@ -3,6 +3,7 @@ import sqlite3
 import json
 
 app = Flask(__name__)
+app.json.sort_keys = False
 DATABASE = "pet_toxins.db"
 
 def get_db_connection():
@@ -21,12 +22,13 @@ def get_toxins():
     params = []
 
     if name:
-        query += " AND name LIKE ?"
-        params.append(f"%{name}%")
+        query += " AND LOWER(name) LIKE ?"
+        params.append(f"%{name.lower()}%")
     if category:
-        query += " AND category = ?"
-        params.append(category)
+        query += " AND LOWER(category) = ?"
+        params.append(category.lower())
     if animal:
+        animal = animal.title()
         query += " AND json_extract(animals, ?) IS NOT NULL"
         params.append(f"$.{animal}")
 

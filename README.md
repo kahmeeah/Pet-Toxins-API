@@ -1,6 +1,6 @@
 # 🐾 Pet Toxins API
 
-<!-- [![Docs](https://img.shields.io/badge/docs-online-blueviolet)](https://kahmeeah.github.io/pet-toxins-api) -->
+<!-- [![Docs](https://img.shields.io/badge/docs-online-blueviolet)](https://kahmeeah.github.io/Pet-Toxins-API/) -->
 [![API Live](https://img.shields.io/badge/api-live-brightgreen)](https://pet-toxins-api.up.railway.app)
 <!-- [![PyPI](https://img.shields.io/pypi/v/pettoxins-client?label=client)](https://pypi.org/project/pettoxins/) -->
 
@@ -17,7 +17,7 @@ This repo includes:
 
 ## Docs
 
-Coming soon
+Check out the full API docs [here](https://kahmeeah.github.io/Pet-Toxins-API/).
 
 ## License
 

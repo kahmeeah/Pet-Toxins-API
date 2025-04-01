@@ -3,7 +3,7 @@ import sqlite3
 import json
 
 app = Flask(__name__)
-DATABASE = "toxins.db"
+DATABASE = "pet_toxins.db"
 
 def get_db_connection():
     connection = sqlite3.connect(DATABASE)
@@ -49,7 +49,7 @@ def get_toxins():
 def get_toxin_by_id(id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM toxins WHERE id = ?", (id,))
+    cursor.execute("SELECT * FROM toxins WHERE toxin_id = ?", (id,))
     row = cursor.fetchone()
     conn.close()
 
